@@ -21,7 +21,6 @@ class Screen2{
         //Arguments Back button
         this.xBack = 50;
         this.yBack = 50;
-        this.clickBack = false;
 
         this.rect = [];
         this.circles = [];
@@ -29,12 +28,7 @@ class Screen2{
         //Adding rectangles based on number on previous screen
         for (let index = 0; index < this.arraySize; index++) {
             this.rect.push(new Rect((index*110)+50, 175, 40, 50));
-            console.log("ensayo");
         }
-
-
-        console.log(this.arraySize);
-        console.log(this.rect.length);
 
     }
 
@@ -75,20 +69,13 @@ class Screen2{
         textAlign(CENTER);
         text("CIRCLE", this.xb4, this.yb1+10);
 
-        //back button
-        fill(80);
-        rect(this.xBack,this.yBack,100,50);
-        fill(255);
-        textSize(20);
-        textAlign(CENTER);
-        text("Go Back", 50, 60);
     }
 
     drawShapes(){
-        this.rect.forEach(element => {
-            element.DrawRect();
-            element.Movement();
-        });
+        for (let index = 0; index < this.rect.length; index++) {
+            this.rect[index].DrawRect();
+            this.rect[index].Movement();   
+        }
 
         for (let index = 0; index < this.circles.length; index++) {
             this.circles[index].DrawCircle();
@@ -101,11 +88,11 @@ class Screen2{
         if(mouseX > this.xb1-75 && mouseX < this.xb1+75 
             && mouseY > this.yb1-40 && mouseY < this.yb1+40){
             if (this.rect.length-2 <= 10) {
-                this.rect.push(new Rect(this.rect[this.rect.length-1].getPosX()+110, 175, 50));
+                this.rect.push(new Rect(this.rect[this.rect.length-1].getPosX()+110, 175, 40));
             }
 
             if (this.circles.length-2 <= 10) {
-                this.circles.push(new Circle(this.rect[this.rect.length-1].getPosX()+110, 375, 50, 10));
+                this.circles.push(new Circle(this.rect[this.rect.length-1].getPosX()+110, 375, 40, 10));
                 for (let index = 0; index < this.circles.length; index++) {
                     this.circles[index].setValue(this.rect[index].getValue()); 
                 }
@@ -146,12 +133,24 @@ class Screen2{
                 }
         }
 
-        //Back button
-        if(mouseX > this.xBack-100/2 && mouseX < this.xBack+100/2 
-            && mouseY > this.yBack-50/2 && mouseY < this.yBack+50/2){
-            //console.log("funciona");
-            this.clickBack = true;
-        }
+    }
+
+    sortShapes(){
+            this.rect.sort((a,b) => {
+            return a.value - b.value;
+            });
+
+            for (let index = 0; index < this.rect.length; index++) {
+                this.rect[index].setPosX((index*110)+50); 
+            }
+
+            this.circles.sort((a,b) => {
+                return a.value - b.value;
+            });
+
+            for (let index = 0; index < this.circles.length; index++) {
+                this.circles[index].setPosX((index*110)+50); 
+            }
     }
 
     getXB1(){

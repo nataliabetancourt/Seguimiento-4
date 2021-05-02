@@ -17,3 +17,9 @@ function mousePressed(){
   controller.clickButtons1();
   
 }
+
+function keyTyped(){
+  if (key == 'n') {
+    controller.keySort();
+  }
+}

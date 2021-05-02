@@ -28,7 +28,12 @@ class MainController{
         if(this.startS2){
             this.screen2.clickButtons();
         }
-        
+    }
+
+    keySort(){
+      if(this.startS2){
+        this.screen2.sortShapes(this.key);
+    }
     }
 
 

@@ -10,7 +10,7 @@ class Rect extends Shape{
     constructor(posX, posY, size){
         super(posX, posY);
         this.size = size;
-        this.speed = 4;
+        this.speed = 2;
         this.dir = 1;
         this.value = Math.floor(Math.random()*10+1);
 
@@ -47,6 +47,10 @@ class Rect extends Shape{
         return this.posX;
     }
 
+    setPosX(posX){
+        this.posX = posX;
+    }
+
     getSize(){
         return this.size;
     }
@@ -65,7 +69,7 @@ class Circle extends Shape{
     constructor(posX, posY, size, value){
         super(posX, posY);
         this.size = size;
-        this.speed = 4;
+        this.speed = 2;
         this.dir = 1;
         this.value = value;
     }
